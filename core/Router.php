@@ -34,15 +34,24 @@ class Router
   public function renderView($view)
   {
     $layoutContent = $this->layoutContent();
-    include_once Application::$ROOT_DIR."/views/$view.php";
+    $viewContent = $this->renderOnlyView($view);
+    // replace {{content}} with $viewContent inside $layoutContent
+    return str_replace('{{content}}', $viewContent, $layoutContent);
   }
 
   protected function layoutContent()
   {
-    // start caching output
+    // start output caching
     ob_start();
-    include_once Application::$ROOT_DIR."/views/layouts/main.php";
-    // return the value & clean the buffer
+    include_once Application::$ROOT_DIR.'/views/layouts/main.php';
+    // return the cached value & clear the buffer
+    return ob_get_clean();
+  }
+
+  protected function renderOnlyView($view)
+  {
+    ob_start();
+    include_once Application::$ROOT_DIR."/views/$view.php";
     return ob_get_clean();
   }
 }
