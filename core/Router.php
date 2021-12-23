@@ -39,7 +39,8 @@ class Router
     if (is_array($callback)) {
       // instance generation from class
       // and replace class by instance in the array
-      $callback[0] = new $callback[0]();
+      Application::$app->controller = new $callback[0]();
+      $callback[0] = Application::$app->controller;
     }
     // take the callback and its params as params
     return call_user_func($callback, $this->request);
@@ -55,9 +56,10 @@ class Router
 
   protected function layoutContent()
   {
+    $layout = Application::$app->controller->layout;
     // start output caching
     ob_start();
-    include_once Application::$ROOT_DIR.'/views/layouts/main.php';
+    include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
     // return the cached value & clear the buffer
     return ob_get_clean();
   }

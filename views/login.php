@@ -1,4 +1,4 @@
-<h1>Contact us</h1>
+<h1>Login</h1>
 
 <!-- empty action = $this (current page) -->
 <form action="" method="post">
