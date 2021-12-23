@@ -27,20 +27,21 @@ class Router
   public function resolve()
   {
     $path = $this->request->getPath();
-    $method = $this->request->getMethod();
+    $method = $this->request->method();
     $callback = $this->routes[$method][$path] ?? false;
     if ($callback === false) {
       $this->response->setStatusCode(404);
       return $this->renderView('_404');
     }
-    if (is_string($callback)) {
-      return $this->renderView($callback);
-    }
+    // if (is_string($callback)) {
+    //   return $this->renderView($callback);
+    // }
     if (is_array($callback)) {
       // instance generation from class
       // and replace class by instance in the array
       $callback[0] = new $callback[0]();
     }
+    // take the callback and its params as params
     return call_user_func($callback, $this->request);
   }
 
