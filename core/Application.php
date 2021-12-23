@@ -13,7 +13,7 @@ class Application
   public function __construct($rootPath)
   {
     self::$ROOT_DIR = $rootPath;
-    // and that, the objet is able to refer to its own instance
+    // and that, the class is able to refer to its own instance
     self::$app = $this;
     $this->request = new Request();
     $this->response = new Response();
