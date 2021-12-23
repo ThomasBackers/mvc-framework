@@ -42,7 +42,9 @@ class Router
       Application::$app->controller = new $callback[0]();
       $callback[0] = Application::$app->controller;
     }
-    // take the callback and its params as params
+    // take the callback which contains an object and a string
+    // it search for a method called like the string in the object
+    // and try to insert the request as param if possible
     return call_user_func($callback, $this->request);
   }
 
