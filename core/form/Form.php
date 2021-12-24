@@ -2,15 +2,24 @@
 
 namespace app\core\form;
 
+use app\core\Model;
+
 class Form
 {
-  public static function begin()
+  public static function begin($action, $method)
   {
-    return '<form action="" method="">';
+    // replace the %s with the variables in order of appearance
+    echo sprintf('<form action="%s" method="%s">', $action, $method);
+    return new Form();
   }
 
   public static function end()
   {
     return '</form>';
+  }
+
+  public function field(Model $model, $attribute)
+  {
+    return new Field($model, $attribute);
   }
 }
