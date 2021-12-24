@@ -1,6 +1,9 @@
 <h1>Create an account</h1>
 
-<?php echo \app\core\form\Form::begin('', 'post') ?>
+<?php
+// begin() output the form open tag and return an instance of Form
+$form = \app\core\form\Form::begin('', 'post')
+?>
   <?php echo ?>
 <?php echo \app\core\form\Form::end() ?>
 <form action="" method="post">
