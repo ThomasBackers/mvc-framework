@@ -12,7 +12,7 @@ class Application
   // using this
   public static Application $app;
   public Controller $controller;
-  public function __construct($rootPath)
+  public function __construct($rootPath, array $config)
   {
     self::$ROOT_DIR = $rootPath;
     // and that, the class is able to refer to its own instance
@@ -20,7 +20,7 @@ class Application
     $this->request = new Request();
     $this->response = new Response();
     $this->router = new Router($this->request, $this->response);
-    $this->db = new Database();
+    $this->db = new Database($config['db']);
   }
 
   public function getController()
